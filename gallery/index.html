@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lazy Loading Gallery Demo</title>
+<style>
+  :root {
+    --bg: #0f1115;
+    --card-bg: #1a1d24;
+    --text: #e8e9ec;
+    --muted: #9aa0ab;
+    --accent: #6ee7b7;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+  }
+  header {
+    padding: 48px 24px 32px;
+    text-align: center;
+    max-width: 720px;
+    margin: 0 auto;
+  }
+  header h1 { font-size: 2rem; margin-bottom: 8px; }
+  header p { color: var(--muted); line-height: 1.6; }
+  .badge {
+    display: inline-block;
+    background: rgba(110,231,183,0.12);
+    color: var(--accent);
+    border: 1px solid rgba(110,231,183,0.35);
+    padding: 4px 12px;
+    border-radius: 999px;
+    font-size: 0.8rem;
+    margin-bottom: 16px;
+  }
+  .gallery {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 24px 80px;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+  }
+  figure {
+    margin: 0;
+    background: var(--card-bg);
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid #262a33;
+  }
+  figure img {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    background: #22252d; /* placeholder color while loading */
+  }
+  figcaption {
+    padding: 14px 18px;
+    font-size: 0.9rem;
+    color: var(--muted);
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+  }
+  figcaption strong { color: var(--text); font-weight: 500; }
+  .tag-eager { color: #f59e0b; }
+  .tag-lazy { color: var(--accent); }
+  footer {
+    text-align: center;
+    color: var(--muted);
+    padding: 0 24px 60px;
+    font-size: 0.85rem;
+  }
+</style>
+</head>
+<body>
+<nav style="max-width:900px;margin:0 auto;padding:20px 24px 0;">
+  <a href="../" style="color:var(--accent);text-decoration:none;font-size:0.9rem;">← Back to project hub</a>
+</nav>
+
+<header>
+  <span class="badge">Core Web Vitals demo</span>
+  <h1>Lazy Loading Gallery</h1>
+  <p>
+    15 large images below. Only the first one loads immediately
+    (<code>loading="eager"</code>) so it can paint fast as the LCP element.
+    Every image after that uses <code>loading="lazy"</code> — open DevTools →
+    Network tab and scroll slowly to watch each one fetch only when it's about
+    to enter the viewport.
+  </p>
+</header>
+
+<main class="gallery">
+
+  <figure>
+    <img src="https://picsum.photos/id/1015/1600/900" width="1600" height="900"
+         alt="Mountain river landscape" loading="eager" fetchpriority="high">
+    <figcaption><strong>Image 1 — Mountain River</strong><span class="tag-eager">eager (above the fold)</span></figcaption>
+  </figure>
+
+  <figure><img src="https://picsum.photos/id/1016/1600/900" width="1600" height="900" alt="Rocky coastline" loading="lazy"><figcaption><strong>Image 2 — Rocky Coastline</strong><span class="tag-lazy">lazy</span></figcaption></figure>
+  <figure><img src="https://picsum.photos/id/1018/1600/900" width="1600" height="900" alt="Forest valley" loading="lazy"><figcaption><strong>Image 3 — Forest Valley</strong><span class="tag-lazy">lazy</span></figcaption></figure>
+  <figure><img src="https://picsum.photos/id/1019/1600/900" width="1600" height="900" alt="Desert dunes" loading="lazy"><figcaption><strong>Image 4 — Desert Dunes</strong><span class="tag-lazy">lazy</span></figcaption></figure>
+  <figure><img src="https://picsum.photos/id/1021/1600/900" width="1600" height="900" alt="Snowy peak" loading="lazy"><figcaption><strong>Image 5 — Snowy Peak</strong><span class="tag-lazy">lazy</span></figcaption></figure>
+  <figure><img src="https://picsum.photos/id/1025/1600/900" width="1600" height="900" alt="Dog portrait" loading="lazy"><figcaption><strong>Image 6 — Dog Portrait</strong><span class="tag-lazy">lazy</span></figcaption></figure>
+  <figure><img src="https://picsum.photos/id/1027/1600/900" width="1600" height="900" alt="Lakeside pier" loading="lazy"><figcaption><strong>Image 7 — Lakeside Pier</strong><span class="tag-lazy">lazy</span></figcaption></figure>
+  <figure><img src="https://picsum.photos/id/1035/1600/900" width="1600" height="900" alt="Foggy hillside" loading="lazy"><figcaption><strong>Image 8 — Foggy Hillside</strong><span class="tag-lazy">lazy</span></figcaption></figure>
+  <figure><img src="https://picsum.photos/id/1040/1600/900" width="1600" height="900" alt="Old bicycle" loading="lazy"><figcaption><strong>Image 9 — Old Bicycle</strong><span class="tag-lazy">lazy</span></figcaption></figure>
+  <figure><img src="https://picsum.photos/id/1041/1600/900" width="1600" height="900" alt="Autumn road" loading="lazy"><figcaption><strong>Image 10 — Autumn Road</strong><span class="tag-lazy">lazy</span></figcaption></figure>
+  <figure><img src="https://picsum.photos/id/1043/1600/900" width="1600" height="900" alt="Sunflower field" loading="lazy"><figcaption><strong>Image 11 — Sunflower Field</strong><span class="tag-lazy">lazy</span></figcaption></figure>
+  <figure><img src="https://picsum.photos/id/1044/1600/900" width="1600" height="900" alt="Wooden cabin" loading="lazy"><figcaption><strong>Image 12 — Wooden Cabin</strong><span class="tag-lazy">lazy</span></figcaption></figure>
+  <figure><img src="https://picsum.photos/id/1049/1600/900" width="1600" height="900" alt="City skyline at dusk" loading="lazy"><figcaption><strong>Image 13 — City Skyline</strong><span class="tag-lazy">lazy</span></figcaption></figure>
+  <figure><img src="https://picsum.photos/id/1050/1600/900" width="1600" height="900" alt="Beach shoreline" loading="lazy"><figcaption><strong>Image 14 — Beach Shoreline</strong><span class="tag-lazy">lazy</span></figcaption></figure>
+  <figure><img src="https://picsum.photos/id/1053/1600/900" width="1600" height="900" alt="Green meadow" loading="lazy"><figcaption><strong>Image 15 — Green Meadow</strong><span class="tag-lazy">lazy</span></figcaption></figure>
+  <figure><img src="https://picsum.photos/id/1056/1600/900" width="1600" height="900" alt="Waterfall in jungle" loading="lazy"><figcaption><strong>Image 16 — Jungle Waterfall</strong><span class="tag-lazy">lazy</span></figcaption></figure>
+
+</main>
+
+<footer>
+  Built to test native <code>loading="lazy"</code> — open this file in Chrome, press F12,
+  go to Lighthouse, and click "Analyze page load."
+</footer>
+
+</body>
+</html>

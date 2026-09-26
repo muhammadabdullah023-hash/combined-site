@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Animation Demo</title>
+<style>
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: #0f1115;
+    color: #eaeaea;
+  }
+
+  /* --- STAGGERED FADE-IN: each element animates in one after another --- */
+  .fade-in {
+    opacity: 0;
+    transform: translateY(12px);
+    animation: fadeIn 0.6s ease-out forwards;
+  }
+  .fade-in:nth-child(1) { animation-delay: 0.1s; }
+  .fade-in:nth-child(2) { animation-delay: 0.25s; }
+  .fade-in:nth-child(3) { animation-delay: 0.4s; }
+
+  @keyframes fadeIn {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* --- CARD: lifts and glows slightly on hover --- */
+  .card {
+    text-align: center;
+    padding: 40px 48px;
+    border-radius: 16px;
+    background: #181b21;
+    border: 1px solid #262a33;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  }
+
+  .card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+    border-color: #7c3aed;
+  }
+
+  h1 {
+    margin: 0 0 10px;
+    font-size: 1.6rem;
+  }
+
+  p {
+    margin: 0 0 24px;
+    color: #9ca0aa;
+    font-size: 0.95rem;
+  }
+
+  /* --- BUTTON: color/scale hover + ripple on click --- */
+  .btn {
+    position: relative;
+    overflow: hidden;
+    padding: 12px 28px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 8px;
+    background: #7c3aed;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+  }
+
+  .btn:hover {
+    background-color: #9333ea;
+    transform: scale(1.05);
+    box-shadow: 0 6px 16px rgba(147, 51, 234, 0.4);
+  }
+
+  .btn:active {
+    transform: scale(0.97);
+  }
+
+  .ripple {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.6);
+    transform: scale(0);
+    animation: ripple 0.5s linear;
+    pointer-events: none;
+  }
+
+  @keyframes ripple {
+    to {
+      transform: scale(3);
+      opacity: 0;
+    }
+  }
+</style>
+</head>
+<body>
+  <a href="../" style="position:fixed;top:20px;left:20px;color:#9ca0aa;text-decoration:none;font-size:0.9rem;">← Back to project hub</a>
+
+  <div class="card fade-in">
+    <h1 class="fade-in">Smooth Animation Demo</h1>
+    <p class="fade-in">Hover the card, hover the button, then click it.</p>
+    <button class="btn fade-in" onclick="makeRipple(event)">Hover Me</button>
+  </div>
+
+  <script>
+    function makeRipple(e) {
+      const btn = e.currentTarget;
+      const circle = document.createElement('span');
+      const size = Math.max(btn.clientWidth, btn.clientHeight);
+
+      circle.classList.add('ripple');
+      circle.style.width = circle.style.height = size + 'px';
+      circle.style.left = (e.clientX - btn.getBoundingClientRect().left - size / 2) + 'px';
+      circle.style.top = (e.clientY - btn.getBoundingClientRect().top - size / 2) + 'px';
+
+      btn.appendChild(circle);
+      circle.addEventListener('animationend', () => circle.remove());
+    }
+  </script>
+</body>
+</html>

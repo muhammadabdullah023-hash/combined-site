@@ -1,0 +1,60 @@
+name: Deploy combined site to GitHub Pages
+
+# Task 6 — Continuous Integration: runs automatically on every push to main.
+# It builds the Neon UI React app, then assembles it together with the
+# static pages (gallery, tasks, animations, hub) into one deployable site.
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: "npm"
+          cache-dependency-path: neon-ui-src/package-lock.json
+
+      - name: Install and build Neon UI (React app)
+        working-directory: ./neon-ui-src
+        run: |
+          npm ci
+          npm run build
+
+      - name: Assemble the combined static site
+        run: |
+          mkdir -p _site
+          cp index.html style.css _site/
+          cp -r gallery _site/gallery
+          cp -r animations _site/animations
+          cp -r tasks _site/tasks
+          cp -r neon-ui-src/dist _site/neon-ui
+
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./_site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

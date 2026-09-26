@@ -1,0 +1,8 @@
+node_modules/
+dist/
+_site/
+.DS_Store
+*.local
+neon-ui-src/dist/
+auth-backend/users.json
+auth-backend/.jwt-secret

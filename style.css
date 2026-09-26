@@ -1,0 +1,116 @@
+:root {
+  --bg: #0b0e14;
+  --surface: #12161f;
+  --border: #232a38;
+  --text: #e7ecf3;
+  --muted: #8993a6;
+  --accent: #46e8d0;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  line-height: 1.5;
+}
+code {
+  background: rgba(255,255,255,0.08);
+  padding: 1px 6px;
+  border-radius: 4px;
+  font-size: 0.9em;
+}
+
+/* Accessibility: same skip-link pattern used across every page in this project */
+.skip-link {
+  position: absolute;
+  top: -48px;
+  left: 12px;
+  background: var(--accent);
+  color: #061014;
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-weight: 600;
+  text-decoration: none;
+  z-index: 1000;
+  transition: top 0.2s ease;
+}
+.skip-link:focus { top: 12px; }
+
+a:focus-visible, .hub-card:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+.hub-header {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 64px 24px 32px;
+  text-align: center;
+}
+.eyebrow {
+  color: var(--accent);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  margin-bottom: 12px;
+}
+.hub-header h1 { font-size: clamp(28px, 5vw, 42px); margin: 0 0 10px; }
+.subtitle { color: var(--muted); font-size: 16px; max-width: 560px; margin: 0 auto; }
+
+.hub-grid {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 24px 80px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.hub-card {
+  display: block;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 26px;
+  text-decoration: none;
+  color: var(--text);
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+a.hub-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--accent);
+  box-shadow: 0 10px 28px rgba(0,0,0,0.35);
+}
+.hub-card-static { opacity: 0.85; }
+
+.hub-number {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--accent);
+  letter-spacing: 1px;
+  margin-bottom: 10px;
+}
+.hub-card h2 { font-size: 19px; margin: 0 0 10px; }
+.hub-card p { color: var(--muted); font-size: 14px; margin: 0; line-height: 1.6; }
+.hub-link {
+  display: inline-block;
+  margin-top: 16px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--accent);
+}
+
+.hub-footer {
+  text-align: center;
+  color: var(--muted);
+  font-size: 13px;
+  padding: 0 24px 60px;
+}
+
+@media (max-width: 560px) {
+  .hub-header { padding: 44px 18px 24px; }
+  .hub-grid { padding: 0 18px 60px; }
+}

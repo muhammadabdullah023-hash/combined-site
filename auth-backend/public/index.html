@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Secure Auth</title>
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<div class="wrap">
+  <h1>Secure Auth</h1>
+  <p class="sub">
+    This page just sends requests to the server. All hashing, password
+    checking, and token signing happen server-side in <code>server.js</code>.
+  </p>
+
+  <div class="grid">
+    <div class="card">
+      <h2>Register</h2>
+      <label>Username</label>
+      <input id="reg-user" type="text" placeholder="Enter User" />
+      <label>Password</label>
+      <input id="reg-pass" type="password" placeholder="At least 8 characters" />
+      <button onclick="handleRegister()">Create account</button>
+      <div id="reg-msg" class="msg"></div>
+    </div>
+
+    <div class="card">
+      <h2>Login</h2>
+      <label>Username</label>
+      <input id="login-user" type="text" placeholder="Enter User" />
+      <label>Password</label>
+      <input id="login-pass" type="password" placeholder="Your password" />
+      <button onclick="handleLogin()">Log in</button>
+      <div id="login-msg" class="msg"></div>
+    </div>
+
+    <div class="card full profile-box" id="profile-box">
+      <h2>Protected profile</h2>
+      <span class="pill">Authenticated</span>
+      <p id="profile-text"></p>
+      <button class="secondary" onclick="handleLogout()">Log out</button>
+    </div>
+
+    <div class="card full">
+      <h2>Your current token</h2>
+      <pre id="token-view">No token yet — log in to get one.</pre>
+    </div>
+  </div>
+</div>
+<script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,12 @@
+{
+  "name": "final-auth",
+  "version": "1.0.0",
+  "description": "Server-side secure registration/login: bcrypt password hashing + JWT tokens, with a simple HTML front end.",
+  "main": "server.js",
+  "scripts": { "start": "node server.js" },
+  "dependencies": {
+    "express": "^5.2.1",
+    "bcryptjs": "^2.4.3",
+    "jsonwebtoken": "^9.0.3"
+  }
+}
